@@ -1,27 +1,46 @@
-<html>
+<?php
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Set preferences as cookies
+    setcookie('font_style', $_POST['font_style'], time() + 86400 * 30, '/');
+    setcookie('font_size', $_POST['font_size'], time() + 86400 * 30, '/');
+    setcookie('font_color', $_POST['font_color'], time() + 86400 * 30, '/');
+    setcookie('bg_color', $_POST['bg_color'], time() + 86400 * 30, '/');
+    // Redirect to next page to display selected settings
+    header("Location: setA2page2.php");
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Change preferences</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Preferences</title>
 </head>
 <body>
-<h1>Change preferences</h1>
-<form action="Secondpage.php" method="post">
-<label for="fontstyle">Font Style:</label>
-<select name="fontstyle" id="fontstyle">
-<option value="Arial">Arial</option>
-<option value="Times New Roman">Times New Roman</option>
-<option value="Verdana">Verdana</option>
-</select><br><br>
-<label for="fontsize">Font Size:</label>
-<select name="fontsize" id="fontsize">
-<option value="12">12</option>
-<option value="14">14</option>
-<option value="16">16</option>
-</select><br><br>
-<label for="fontcolor">Font Color:</label>
-<input type="color" name="fontcolor" id="fontcolor"><br><br>
-<label for="bgcolor">Background Color:</label>
-<input type="color" name="bgcolor" id="bgcolor"><br><br>
-<input type="submit" name="submit" value="Save">
-</form>
+    <h1>Set Preferences</h1>
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <label for="font_style">Font Style:</label>
+        <select name="font_style" id="font_style">
+            <option value="Arial">Arial</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Times New Roman">Times New Roman</option>
+        </select><br><br>
+        
+        <label for="font_size">Font Size:</label>
+        <select name="font_size" id="font_size">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+        </select><br><br>
+
+        <label for="font_color">Font Color:</label>
+        <input type="color" name="font_color" id="font_color"><br><br>
+
+        <label for="bg_color">Background Color:</label>
+        <input type="color" name="bg_color" id="bg_color"><br><br>
+
+        <input type="submit" value="Save Preferences">
+    </form>
 </body>
 </html>
